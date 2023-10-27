@@ -12,11 +12,13 @@ export default function Home() {
           <div
             onClick={() => setActive(item)}
             key={item}
-            className="px-5 cursor-pointer font-light relative rounded-full h-10 flex items-center justify-center hover:opacity-50 transition-opacity duration-300"
+            className={`${
+              active === item ? "" : "hover:opacity-50"
+            } px-5 cursor-pointer font-light select-none relative rounded-full h-10 flex items-center justify-center transition-opacity duration-300`}
           >
             {active === item && (
               <motion.div
-                className="absolute inset-0 bg-gray-50 shadow-[0_0_50px_-15px]"
+                className="absolute inset-0 bg-gray-50 shadow-[0_0_30px_-5px]"
                 layoutId="root"
                 style={{ borderRadius: 50 }}
                 transition={{ duration: 0.7, type: "spring" }}
