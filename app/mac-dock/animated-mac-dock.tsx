@@ -6,6 +6,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { Tv, Tv2 } from "lucide-react";
 import { useRef } from "react";
 
 function Items({ mouseX }: { mouseX: MotionValue<number> }) {
@@ -15,18 +16,29 @@ function Items({ mouseX }: { mouseX: MotionValue<number> }) {
     return value - bound.x - bound.width / 2;
   });
   const widthSync = useTransform(distance, [-100, 0, 100], [40, 80, 40]);
+  const scaleSync = useTransform(widthSync, [40, 80], [1, 2]);
   const width = useSpring(widthSync, { mass: 0.1, damping: 15 });
+  const scale = useSpring(scaleSync, { mass: 0.1, damping: 15 });
+
   return (
     <motion.div
       ref={ref}
-      style={{ width: width }}
+      style={{ width }}
       className="aspect-square w-10 flex items-center justify-center bg-neutral-700 rounded-full"
-    ></motion.div>
+    >
+      <motion.span
+        style={{ scale: scale }}
+        className="600 flex items-center justify-center h-full w-full"
+      >
+        <Tv2 />
+      </motion.span>
+    </motion.div>
   );
 }
 
 export function AnimatedMacDock() {
   const mouseX = useMotionValue(Infinity);
+
   function onMousemove() {}
 
   return (
