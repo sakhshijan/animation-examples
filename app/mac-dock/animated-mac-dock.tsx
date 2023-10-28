@@ -16,9 +16,8 @@ function Items({ mouseX }: { mouseX: MotionValue<number> }) {
     return value - bound.x - bound.width / 2;
   });
   const widthSync = useTransform(distance, [-100, 0, 100], [40, 80, 40]);
-  const scaleSync = useTransform(widthSync, [40, 80], [1, 2]);
   const width = useSpring(widthSync, { mass: 0.1, damping: 15 });
-  const scale = useSpring(scaleSync, { mass: 0.1, damping: 15 });
+  const scale = useTransform(width, [40, 80], [1, 2]);
 
   return (
     <motion.div
