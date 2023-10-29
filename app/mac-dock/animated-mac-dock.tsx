@@ -6,8 +6,28 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { Tv, Tv2 } from "lucide-react";
+import { Tv2 } from "lucide-react";
 import { useRef } from "react";
+
+export function AnimatedMacDock() {
+  const mouseX = useMotionValue(Infinity);
+
+  function onMousemove() {}
+
+  return (
+    <div
+      onMouseLeave={() => mouseX.set(Infinity)}
+      onMouseMove={(e) => mouseX.set(e.clientX)}
+      className="flex pb-3 px-3 gap-4 rounded-lg bg-neutral-900 mx-auto h-16 items-end justify-center"
+    >
+      {Array(6)
+        .fill(0)
+        .map((v, index) => (
+          <Items key={index} mouseX={mouseX} />
+        ))}
+    </div>
+  );
+}
 
 function Items({ mouseX }: { mouseX: MotionValue<number> }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,25 +52,5 @@ function Items({ mouseX }: { mouseX: MotionValue<number> }) {
         <Tv2 />
       </motion.span>
     </motion.div>
-  );
-}
-
-export function AnimatedMacDock() {
-  const mouseX = useMotionValue(Infinity);
-
-  function onMousemove() {}
-
-  return (
-    <div
-      onMouseLeave={() => mouseX.set(Infinity)}
-      onMouseMove={(e) => mouseX.set(e.clientX)}
-      className="flex pb-3 px-3 gap-4 rounded-lg bg-neutral-900 mx-auto h-16 items-end justify-center"
-    >
-      {Array(6)
-        .fill(0)
-        .map((v, index) => (
-          <Items key={index} mouseX={mouseX} />
-        ))}
-    </div>
   );
 }
