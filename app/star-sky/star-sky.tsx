@@ -16,7 +16,7 @@ function Stars() {
     ref.current.rotation.x += delta / 10;
     ref.current.rotation.y += delta / 15;
   });
-
+  //test vercel
   return (
     <group rotation={[0, 0, Math.PI / 4]} ref={ref}>
       <Points frustumCulled stride={3} positions={starts}>
